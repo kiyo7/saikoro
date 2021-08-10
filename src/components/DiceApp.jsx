@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 //components
 import { Title } from './Title';
+import { Current } from './Current';
 import { Dice } from './Dice';
 import { Button } from './Button';
 
@@ -22,6 +23,8 @@ export const DiceApp = () => {
   const [randomDice2, setRandomDice2] = useState(saikoro[0]);
   const [randomDice3, setRandomDice3] = useState(saikoro[0]);
 
+  const [current, setCurrent] = useState(true);
+
   //サイコロシャッフル
   const shuffleDice = () => {
     setRandomDice1(saikoro[Math.floor(Math.random() * 6)]);
@@ -38,9 +41,17 @@ export const DiceApp = () => {
     }, 2000);
   };
 
+  //current切り替え
+  const toggleCurrent = () => {
+    setCurrent(!current);
+  };
+
   return (
     <div style={{ backgroundColor: 'green', height: '300px' }}>
       <Title />
+      {current && <Current>あなたの番です</Current>}
+      {current || <Current>相手の番です</Current>}
+
       <div style={{ textAlign: 'center' }}>
         <Dice dice={randomDice1} />
         <Dice dice={randomDice2} />
